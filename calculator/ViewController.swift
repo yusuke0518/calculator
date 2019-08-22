@@ -13,6 +13,7 @@ class ViewContrller: UIViewController {
     
     
     @IBOutlet weak var formulaLabel: UILabel!
+    let errorMessage = "式を正しく入力してください"
     
     override func viewDidLoad() {
         viewSettings()
@@ -20,12 +21,15 @@ class ViewContrller: UIViewController {
     }
     
     func viewSettings(){
-        formulaLabel.text = ""
+        formulaLabel.text = "0"
         formulaLabel.layer.borderColor = UIColor.black.cgColor
         formulaLabel.layer.borderWidth = 3
     }
     
     @IBAction func inputFormula(_ sender: Any) {
+        if formulaLabel.text == errorMessage {
+            formulaLabel.text = ""
+        }
         guard let formulaText = formulaLabel.text else {
             return
         }
@@ -36,7 +40,7 @@ class ViewContrller: UIViewController {
     }
     
     @IBAction func calculateAnswer(_ sender: Any) {
-        formulaLabel.text = ""
+        formulaLabel.text = "0"
     }
     
     @IBAction func clearFormula(_ sender: Any) {
@@ -67,7 +71,7 @@ class ViewContrller: UIViewController {
             return formatAnswer(String(answer))
         } catch {
             // 計算式が不当だった場合
-            return "式を正しく入力してください"
+            return errorMessage
         }
     }
     
