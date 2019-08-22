@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A4B4133A0F2CF5C432EE74E /* Pods_calculator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79FF81A95B86112B51652046 /* Pods_calculator.framework */; };
+		43F33CFA230E642B00827B43 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F33CF9230E642B00827B43 /* ViewModel.swift */; };
 		51D191597FBF6AFFC6D850B0 /* Pods_calculatorTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF45330EBE2236ECF2FDB2E6 /* Pods_calculatorTests.framework */; };
 		AF5D6798230D9B8300A320FE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5D6797230D9B8300A320FE /* AppDelegate.swift */; };
 		AF5D679A230D9B8300A320FE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF5D6799230D9B8300A320FE /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		43F33CF9230E642B00827B43 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		4578E9B17B32A060126F3DE4 /* Pods-calculatorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculatorTests.debug.xcconfig"; path = "Target Support Files/Pods-calculatorTests/Pods-calculatorTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5F61D2E7FC24D30245FC275E /* Pods-calculatorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-calculatorTests.release.xcconfig"; path = "Target Support Files/Pods-calculatorTests/Pods-calculatorTests.release.xcconfig"; sourceTree = "<group>"; };
 		6639B153A7C2AF76DA6C47DF /* Pods_calculatorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_calculatorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +133,7 @@
 			children = (
 				AF5D6797230D9B8300A320FE /* AppDelegate.swift */,
 				AF5D6799230D9B8300A320FE /* ViewController.swift */,
+				43F33CF9230E642B00827B43 /* ViewModel.swift */,
 				AF5D679B230D9B8300A320FE /* Main.storyboard */,
 				AF5D67A1230D9B8500A320FE /* Assets.xcassets */,
 				AF5D67A3230D9B8500A320FE /* LaunchScreen.storyboard */,
@@ -391,6 +394,7 @@
 			files = (
 				AF5D679A230D9B8300A320FE /* ViewController.swift in Sources */,
 				AF5D67A0230D9B8300A320FE /* calculator.xcdatamodeld in Sources */,
+				43F33CFA230E642B00827B43 /* ViewModel.swift in Sources */,
 				AF5D6798230D9B8300A320FE /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

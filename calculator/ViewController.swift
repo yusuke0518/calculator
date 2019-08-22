@@ -13,21 +13,28 @@ class ViewContrller: UIViewController {
     
     
     @IBOutlet weak var formulaLabel: UILabel!
-    let errorMessage = "式を正しく入力してください"
+    
+    let viewModel = ViewModel()
+    var taxIncluded: Bool?
     
     override func viewDidLoad() {
         viewSettings()
         super.viewDidLoad()
     }
     
+    func initModel(){
+        formulaLabel.text = ""
+        taxIncluded = false
+    }
+    
     func viewSettings(){
-        formulaLabel.text = "0"
+        initModel()
         formulaLabel.layer.borderColor = UIColor.black.cgColor
         formulaLabel.layer.borderWidth = 3
     }
     
     @IBAction func inputFormula(_ sender: Any) {
-        if formulaLabel.text == errorMessage {
+        if formulaLabel.text == viewModel.errorMessage || formulaLabel.text == viewModel.cannotFactorization {
             formulaLabel.text = ""
         }
         guard let formulaText = formulaLabel.text else {
@@ -39,50 +46,48 @@ class ViewContrller: UIViewController {
         formulaLabel.text = formulaText + senderedText
     }
     
-    @IBAction func calculateAnswer(_ sender: Any) {
-        formulaLabel.text = "0"
+    @IBAction func clearFormula(_ sender: Any) {
+        initModel()
     }
     
-    @IBAction func clearFormula(_ sender: Any) {
+    @IBAction func calculateFormula(_ sender: Any) {
         guard let formulaText = formulaLabel.text else {
             return
         }
-        let formula: String = formatFormula(formulaText)
-        formulaLabel.text = evalFormula(formula)
+        let formula: String = viewModel.formatFormula(formulaText)
+        formulaLabel.text = viewModel.evalFormula(formula)
     }
     
-    private func formatFormula(_ formula: String) -> String {
-        // 入力された整数には`.0`を追加して小数として評価する
-        // また`÷`を`/`に、`×`を`*`に置換する
-        let formattedFormula: String = formula.replacingOccurrences(
-            of: "(?<=^|[÷×\\+\\-\\(])([0-9]+)(?=[÷×\\+\\-\\)]|$)",
-            with: "$1.0",
-            options: NSString.CompareOptions.regularExpression,
-            range: nil
-            ).replacingOccurrences(of: "÷", with: "/").replacingOccurrences(of: "×", with: "*")
-        return formattedFormula
-    }
-    
-    private func evalFormula(_ formula: String) -> String {
-        do {
-            // Expressionで文字列の計算式を評価して答えを求める
-            let expression = Expression(formula)
-            let answer = try expression.evaluate()
-            return formatAnswer(String(answer))
-        } catch {
-            // 計算式が不当だった場合
-            return errorMessage
+    @IBAction func includeTax(_ sender: Any) {
+        if taxIncluded == true { return }
+        guard let formulaText = formulaLabel.text else {
+            return
+        }
+        let formula: String = viewModel.formatFormula(formulaText)
+        formulaLabel.text = viewModel.evalFormula(formula)
+        if formulaLabel.text != viewModel.errorMessage{
+            let num = Double(formulaLabel.text!)!
+            formulaLabel.text = viewModel.formatFormula(String(num*1.08))
+            taxIncluded = true
         }
     }
     
-    private func formatAnswer(_ answer: String) -> String {
-        // 答えの小数点以下が`.0`だった場合は、`.0`を削除して答えを整数で表示する
-        let formattedAnswer: String = answer.replacingOccurrences(
-            of: "\\.0$",
-            with: "",
-            options: NSString.CompareOptions.regularExpression,
-            range: nil)
-        return formattedAnswer
+    @IBAction func excludeTax(_ sender: Any) {
+        if taxIncluded != true { return }
+        guard let formulaText = formulaLabel.text else {
+            return
+        }
+        let formula: String = viewModel.formatFormula(formulaText)
+        formulaLabel.text = viewModel.evalFormula(formula)
+        if formulaLabel.text != viewModel.errorMessage{
+            let num = Double(formulaLabel.text!)!
+            formulaLabel.text = viewModel.formatFormula(String(num/1.08))
+            taxIncluded = false
+        }
+    }
+    
+    @IBAction func primeFactorization(_ sender: Any) {
+        formulaLabel.text = ViewModel().primeFactorizaiton(formulaLabel.text!)
     }
     
 }
